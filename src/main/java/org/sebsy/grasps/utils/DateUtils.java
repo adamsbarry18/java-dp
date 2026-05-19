@@ -3,6 +3,9 @@ package org.sebsy.grasps.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Classe utilitaire spécialisée dans les conversions de dates.
+ */
 public class DateUtils {
 
     private static final DateTimeFormatter FORMATTER =

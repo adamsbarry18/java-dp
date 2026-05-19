@@ -5,7 +5,9 @@ import org.sebsy.grasps.beans.Reservation;
 
 import java.time.LocalDateTime;
 
-// factory
+/**
+ * Factory responsable de la création des objets Reservation.
+ */
 public class ReservationFactory {
 
     public Reservation create(
