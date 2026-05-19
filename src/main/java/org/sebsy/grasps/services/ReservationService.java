@@ -21,9 +21,6 @@ public class ReservationService {
     private ReservationFactory reservationFactory =
             new ReservationFactory();
 
-    private PricingService pricingService =
-            new PricingService();
-
     public Reservation creerReservation(Params params) {
 
         String identifiantClient =
@@ -57,12 +54,13 @@ public class ReservationService {
 
         client.getReservations().add(reservation);
 
-        double total =
-                pricingService.calculerTotal(
-                        client,
-                        type,
-                        nbPlaces
-                );
+        double total = type.getMontant() * nbPlaces;
+
+        if (client.isPremium()) {
+
+            total = total *
+                    (1 - type.getReductionPourcent() / 100.0);
+        }
 
         reservation.setTotal(total);
 
