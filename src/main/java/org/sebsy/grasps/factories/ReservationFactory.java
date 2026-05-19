@@ -10,15 +10,8 @@ import java.time.LocalDateTime;
  */
 public class ReservationFactory {
 
-    public Reservation create(
-            LocalDateTime dateReservation,
-            int nbPlaces,
-            Client client
-    ) {
-
-        Reservation reservation =
-                new Reservation(dateReservation);
-
+    public Reservation create(LocalDateTime dateReservation, int nbPlaces, Client client) {
+        Reservation reservation = new Reservation(dateReservation);
         reservation.setNbPlaces(nbPlaces);
         reservation.setClient(client);
 

@@ -28,43 +28,28 @@ public class ReservationService {
 
     public Reservation creerReservation(Params params) {
 
-        String identifiantClient =
-                params.getIdentifiantClient();
+        String identifiantClient = params.getIdentifiantClient();
 
-        String dateReservationStr =
-                params.getDateReservation();
+        String dateReservationStr = params.getDateReservation();
 
-        String typeReservationStr =
-                params.getTypeReservation();
+        String typeReservationStr = params.getTypeReservation();
 
-        int nbPlaces =
-                params.getNbPlaces();
+        int nbPlaces = params.getNbPlaces();
 
-        LocalDateTime dateReservation =
-                DateUtils.toDate(dateReservationStr);
+        LocalDateTime dateReservation = DateUtils.toDate(dateReservationStr);
 
-        Client client =
-                clientDao.extraireClient(identifiantClient);
+        Client client = clientDao.extraireClient(identifiantClient);
 
-        TypeReservation type =
-                typeReservationDao
-                        .extraireTypeReservation(typeReservationStr);
+        TypeReservation type = typeReservationDao.extraireTypeReservation(typeReservationStr);
 
-        Reservation reservation =
-                reservationFactory.create(
-                        dateReservation,
-                        nbPlaces,
-                        client
-                );
+        Reservation reservation = reservationFactory.create(dateReservation, nbPlaces, client);
 
         client.getReservations().add(reservation);
 
         double total = type.getMontant() * nbPlaces;
 
         if (client.isPremium()) {
-
-            total = total *
-                    (1 - type.getReductionPourcent() / 100.0);
+            total = total * (1 - type.getReductionPourcent() / 100.0);
         }
 
         reservation.setTotal(total);
