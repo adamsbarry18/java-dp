@@ -80,4 +80,11 @@ public class Client {
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
+
+    /**
+     * @param reservation la réservation à ajouter
+     */
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+    }
 }

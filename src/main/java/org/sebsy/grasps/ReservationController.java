@@ -8,11 +8,14 @@ import org.sebsy.grasps.services.ReservationService;
  */
 public class ReservationController {
 
-    private ReservationService reservationService =
-            new ReservationService();
+    private ReservationService reservationService = new ReservationService();
 
     public Reservation creerReservation(Params params) {
-
-        return reservationService.creerReservation(params);
+        return reservationService.creerReservation(
+                params.getIdentifiantClient(),
+                params.getDateReservation(),
+                params.getTypeReservation(),
+                params.getNbPlaces()
+        );
     }
 }

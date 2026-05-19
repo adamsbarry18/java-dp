@@ -10,11 +10,18 @@ import java.time.LocalDateTime;
  */
 public class ReservationFactory {
 
-    public Reservation create(LocalDateTime dateReservation, int nbPlaces, Client client) {
-        Reservation reservation = new Reservation(dateReservation);
+    /**
+     * Construit et retourne une instance de Reservation.
+     *
+     * @param date      date de la réservation
+     * @param nbPlaces  nombre de places réservées
+     * @param client    client associé à la réservation
+     * @return Reservation construite
+     */
+    public Reservation create(LocalDateTime date, int nbPlaces, Client client) {
+        Reservation reservation = new Reservation(date);
         reservation.setNbPlaces(nbPlaces);
         reservation.setClient(client);
-
         return reservation;
     }
 }

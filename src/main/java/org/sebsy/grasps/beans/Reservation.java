@@ -102,4 +102,18 @@ public class Reservation {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    /**
+     * Calcul total reservation
+     *
+     * @param type contient le montant unitaire et le pourcentage de réduction premium
+     */
+    public void calculerTotal(TypeReservation type) {
+        double montantBrut = type.getMontant() * this.nbPlaces;
+        if (this.client.isPremium()) {
+            this.total = montantBrut * (1 - type.getReductionPourcent() / 100.0);
+        } else {
+            this.total = montantBrut;
+        }
+    }
 }

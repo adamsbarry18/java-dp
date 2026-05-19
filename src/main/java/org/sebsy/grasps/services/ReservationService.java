@@ -19,40 +19,23 @@ import java.time.LocalDateTime;
 public class ReservationService {
 
     private ClientDao clientDao = new ClientDao();
+    private TypeReservationDao typeReservationDao = new TypeReservationDao();
+    private ReservationFactory reservationFactory = new ReservationFactory();
 
-    private TypeReservationDao typeReservationDao =
-            new TypeReservationDao();
-
-    private ReservationFactory reservationFactory =
-            new ReservationFactory();
-
-    public Reservation creerReservation(Params params) {
-
-        String identifiantClient = params.getIdentifiantClient();
-
-        String dateReservationStr = params.getDateReservation();
-
-        String typeReservationStr = params.getTypeReservation();
-
-        int nbPlaces = params.getNbPlaces();
+    public Reservation creerReservation(String identifiantClient,
+                                        String dateReservationStr,
+                                        String typeReservationStr,
+                                        int nbPlaces) {
 
         LocalDateTime dateReservation = DateUtils.toDate(dateReservationStr);
-
         Client client = clientDao.extraireClient(identifiantClient);
-
         TypeReservation type = typeReservationDao.extraireTypeReservation(typeReservationStr);
 
         Reservation reservation = reservationFactory.create(dateReservation, nbPlaces, client);
 
-        client.getReservations().add(reservation);
+        client.addReservation(reservation);
 
-        double total = type.getMontant() * nbPlaces;
-
-        if (client.isPremium()) {
-            total = total * (1 - type.getReductionPourcent() / 100.0);
-        }
-
-        reservation.setTotal(total);
+        reservation.calculerTotal(type);
 
         return reservation;
     }
