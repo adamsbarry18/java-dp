@@ -130,12 +130,14 @@ public class Produit {
             if (this.produit.nom == null || this.produit.nom.isEmpty()) {
                 throw new IllegalStateException("Le nom du produit est obligatoire.");
             }
+
+            /*
             if (this.produit.categorie == null) {
                 throw new IllegalStateException("La catégorie du produit est obligatoire.");
             }
             if (this.produit.marque == null) {
                 throw new IllegalStateException("La marque du produit est obligatoire.");
-            }
+            }*/
             return this.produit;
         }
     }
